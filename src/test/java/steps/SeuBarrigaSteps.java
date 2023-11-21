@@ -51,23 +51,36 @@ public class SeuBarrigaSteps extends  CreateDriver{
 
     @Quando("seleciono Adicionar")
     public void seleciono_adicionar() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.findElement(By.xpath("//*[text()='Adicionar']")).click();
     }
     @Quando("informo a conta {string}")
     public void informo_a_conta(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.findElement(By.id("nome")).sendKeys(string);
     }
+
     @Quando("seleciono Salvar")
     public void seleciono_salvar() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.findElement(By.xpath("//*[text()='Salvar']")).click();
     }
     @Então("a conta é inserida com sucesso")
     public void a_conta_é_inserida_com_sucesso() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        String textoContaAdicionada = driver.findElement(By.xpath("//*[text()='Conta adicionada com sucesso!']")).getText();
+        Assert.assertTrue(textoContaAdicionada.equals("Conta adicionada com sucesso!"));
+        driver.quit();
+    }
+
+    @Então("sou notificar que o nome da conta é obrigatório")
+    public void souNotificarQueONomeDaContaÉObrigatório() {
+        String textoNomeDaContaEObrigatorio = driver.findElement(By.xpath("//*[text()='Informe o nome da conta']")).getText();
+        Assert.assertTrue(textoNomeDaContaEObrigatorio.equals("Informe o nome da conta"));
+        driver.quit();
+    }
+
+    @Então("sou notificado que já existe uma conta com esse nome")
+    public void souNotificadoQueJáExisteUmaContaComEsseNome() {
+        String textoContaJaExiste = driver.findElement(By.xpath("//*[text()='Já existe uma conta com esse nome!']")).getText();
+        Assert.assertTrue(textoContaJaExiste.equals("Já existe uma conta com esse nome!"));
+        driver.quit();
     }
 
 }
